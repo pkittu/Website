@@ -1,0 +1,199 @@
+<!DOCTYPE html>  
+<html>  
+<head>  
+<meta name="viewport" content="width=device-width, initial-scale=1"> 
+
+<style>  
+body{  
+  font-family: Calibri, Helvetica, sans-serif;  
+  background-color: gray;
+background-position: center;
+background-size:cover;
+margin-top:40px;  
+} 
+*{
+margin:0;
+padding:0;
+} 
+.main {  
+    padding: 50px;  
+  background-color: lightblue; 
+width:800px;
+margin:auto;  
+}  
+
+	.students {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  border: 2px solid gray;
+  background-color: #ebebeb;
+  color: #2f2f2f;
+  border-radius: 15px;
+  visibility:hidden;
+}
+
+.students div {
+  width: 100%;
+  padding: 10px;
+  text-align: center;
+  visibility :hidden;
+}
+  
+input[type=text], input[type=password],input[type=number], select,textarea {  
+  width: 100%;  
+  padding: 15px;  
+  margin: 5px 0 22px 0;  
+  display: inline-block;  
+  border: none;  
+  background: #f1f1f1;  
+}  
+input[type=text]:focus, input[type=password]:focus ,input[type=number]:focus ,select:focus,textarea:focus {  
+  background-color: orange;  
+  outline: none;  
+}  
+ div {  
+            padding: 10px 0;  
+         }  
+hr {  
+  border: 1px solid #f1f1f1;  
+  margin-bottom: 25px;  
+}  
+.registerbtn {  
+  background-color: #4CAF50;  
+  color: white;  
+  padding: 16px 20px;  
+  margin: 8px 0;  
+  border: none;  
+  cursor: pointer;  
+  width: 100%;  
+  opacity: 0.9;  
+}  
+.registerbtn:hover {  
+  opacity: 1;  
+}
+p {
+margin-top=300px;
+} 
+footer {
+  text-align: center;
+  padding: 3px;
+  background-color: DarkSalmon;
+  color: white;
+}
+header {
+  text-align: center;
+  padding: 3px;
+  background-color: DarkSalmon;
+  color: white;
+}
+</style> 
+</head>  
+<body>  
+<header> <p><a href=""><img src="logo.jpg" width="5%" height="5%" alt=""></a>
+         <h1>ACHARYA UNIVERSITY</h1></p></header>
+<div class="main"> 
+<a href="Studentlist.html"><img src="back.jpg" width="18px" height="18px"alt=""></a><h2>Go to Student's List</h2>
+<h2>Add New Student</h2>
+
+<!--form to fill in student details-->
+
+  <form name="regform" method="post"  autocomplete="off" action="Studentlist.html"  onsubmit="return formValidation()"> 
+                     <div>
+                        <label>Student Name</label>
+                        <input type="text" name="studentname" id="studentname" placeholder= "Student Name" required>
+                    </div>
+                    <div>
+                        <label>Roll No.</label>
+                        <input type="number" name="rollno" id="rollno" placeholder= "Please enter roll no. here"  required>
+                    </div>
+                    <div>
+                        <label>Gender</label>&nbsp;
+ <input type="radio" id="gender" name="gender" >Male&nbsp;<input type="radio"  id="gender" name="gender">Female
+                    </div>
+					<div>
+					<label>Phone Number</label>
+          <input type="number" name="phone" placeholder="Please enter phone no. here"id="phoneNumber" required>
+		  </div>
+					<div>
+					<label>Course</label><br>
+					<select class="course" name="course" id="course" required>  
+<option value="">Select course from list</option>  
+<option value="Computer Science and Engineering">Computer Science and Engineering</option>  
+<option value="Information Technology">Information Technology</option>  
+<option value="Electronics and Communication Engineering">Electronics and Communication Engineering</option>  
+<option value="Mechanical Engineering">Mechanical Engineering</option>  
+<option value="Civil Engineering">Civil Engineering</option>  
+<option value="Electrical & Electronics Engineering">Electrical & Electronics Engineering</option>  
+</select>     
+    <a id="profile" name="profile" href="Profile.html" hidden>View Profile</a>            
+				<div><label>Summary</label><br><textarea cols="100" rows="5" id="summary" name="summary" placeholder="Summary" value="address" required></textarea>  </div>
+ <label>Email</label><input type="text" placeholder="abc@gmail.com" id="email" class="email" name="email" required>  
+                    <div  class="form-action-buttons">
+             <a href="Studentlist.html"><button type="submit" onclick="location.href='Studentlist.html';" class="registerbtn" >Submit</button></a>
+                    </div>  
+</form> 
+</div>
+<div class="students" ></div>
+
+
+<script>
+//to validate form details
+
+const userName = document.getElementById("studentname");
+const email = document.getElementById("email");
+const rollno = document.getElementById("rollno");
+const phoneNumber = document.getElementById("phoneNumber");
+const gender = document.regform;
+const language = document.getElementById("course");
+
+
+function formValidation() {
+//checking student name
+  if (userName.value.length < 2 || userName.value.length > 20) {
+    alert("Name length should be more than 2 and less than 21 charaters");
+    userName.focus();
+    return false;
+  }
+  //checking mail
+  if (email.value.match(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/)) {
+    alert("Please enter a valid email!");
+    email.focus();
+    return false;
+  }
+  // checking rollno
+  if (rollno.value.match(/^[1-9][0-9]{9}$/)) {
+    alert("Roll No must be a number");
+    rollno.focus();
+    return false;
+  }
+  // checking phone number
+  if (!phoneNumber.value.match(/^[1-9][0-9]{9}$/)) {
+    alert("Phone number must be 10 characters long number and first digit can't be 0!");
+    phoneNumber.focus();
+    return false;
+  }
+  // checking gender
+  if (gender.gender.checked ===false) {
+    alert("Please select your gender!");
+    return false;
+  }
+  // checking course
+  if (language.value === "") {
+    alert("Please select your language!")
+    return false;
+  }
+  
+  return true;
+ 
+}
+</script>
+
+</body> 
+<!-- script for local storage--> 
+<script src="localstorage.js"></script>
+<footer><center><h1>©2022 ACHARYA UNIVERSITY</h1></center></footer>
+</html>  
+
+
